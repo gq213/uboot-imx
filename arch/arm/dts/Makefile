@@ -1029,6 +1029,9 @@ dtb-$(CONFIG_ARCH_IMX8ULP) += \
 	imx8ulp-9x9-evk-i3c.dtb \
 	imx8ulp-watch.dtb
 
+ifdef CONFIG_TARGET_IMX8MP_GQ
+dtb-y += imx8mp-gq.dtb
+else
 dtb-$(CONFIG_ARCH_IMX8M) += \
 	imx8mm-data-modul-edm-sbc.dtb \
 	imx8mm-ddr4-evk.dtb \
@@ -1083,6 +1086,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
 	imx8mq-pico-pi.dtb \
 	imx8mq-kontron-pitx-imx8m.dtb \
 	imx8mq-librem5-r4.dtb
+endif
 
 dtb-$(CONFIG_ARCH_IMX9) += \
 	imx93-11x11-evk.dtb \

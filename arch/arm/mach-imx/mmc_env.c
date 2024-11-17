@@ -22,6 +22,8 @@ int mmc_get_env_dev(void)
 	int devno = (*p)->boot_dev_instance;
 	u8 boot_type = (*p)->boot_dev_type;
 
+	printf("%s: devno=%d, boot_type=%d\n", __func__, devno, boot_type);
+
 	/* If not boot from sd/mmc, use default value */
 	if ((boot_type != BOOT_TYPE_SD) && (boot_type != BOOT_TYPE_MMC))
 		return env_get_ulong("mmcdev", 10, CONFIG_SYS_MMC_ENV_DEV);

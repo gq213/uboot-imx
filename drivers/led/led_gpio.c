@@ -58,8 +58,16 @@ static enum led_state_t gpio_led_get_state(struct udevice *dev)
 static int led_gpio_probe(struct udevice *dev)
 {
 	struct led_gpio_priv *priv = dev_get_priv(dev);
+	int ret;
+	
+	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio, GPIOD_IS_OUT);
+	if (ret == 0) {
+		printf("%s: (%s,%d)\n", __func__, 
+			priv->gpio.dev->name, 
+			priv->gpio.offset);
+	}
 
-	return gpio_request_by_name(dev, "gpios", 0, &priv->gpio, GPIOD_IS_OUT);
+	return ret;
 }
 
 static int led_gpio_remove(struct udevice *dev)

@@ -428,3 +428,6 @@ config PHY_RESET_DELAY
 	  Some PHYs need extra delay after reset before any MII register access
 	  is possible.  For such PHY, set this option to the usec delay
 	  required.
+
+config PHY_YT8521SH
+	bool "YT8521SH Ethernet PHY support"

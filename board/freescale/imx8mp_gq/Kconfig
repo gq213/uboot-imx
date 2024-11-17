@@ -1,0 +1,12 @@
+if TARGET_IMX8MP_GQ
+
+config SYS_BOARD
+	default "imx8mp_gq"
+
+config SYS_VENDOR
+	default "freescale"
+
+config SYS_CONFIG_NAME
+	default "imx8mp_gq"
+
+endif

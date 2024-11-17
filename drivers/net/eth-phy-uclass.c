@@ -158,6 +158,11 @@ void eth_phy_reset(struct udevice *dev, int value)
 	if (!dm_gpio_is_valid(&uc_priv->reset_gpio))
 		return;
 
+	printf("%s: (%s,%d),%d\n", __func__, 
+		uc_priv->reset_gpio.dev->name, 
+		uc_priv->reset_gpio.offset, 
+		value);
+
 	dm_gpio_set_value(&uc_priv->reset_gpio, value);
 
 	delay = value ? uc_priv->reset_assert_delay : uc_priv->reset_deassert_delay;

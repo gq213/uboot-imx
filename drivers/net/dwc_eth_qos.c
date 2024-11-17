@@ -790,6 +790,7 @@ static int eqos_start(struct udevice *dev)
 	if (!eqos->phy) {
 		int addr = -1;
 		addr = eqos_get_phy_addr(eqos, dev);
+		printf("%s: addr=%d\n", __func__, addr);
 		eqos->phy = phy_connect(eqos->mii, addr, dev,
 					eqos->config->interface(dev));
 		if (!eqos->phy) {

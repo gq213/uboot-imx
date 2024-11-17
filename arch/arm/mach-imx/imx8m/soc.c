@@ -228,7 +228,7 @@ void enable_caches(void)
 		imx8m_mem_map[entry].virt = gd->bd->bi_dram[i].start;
 		imx8m_mem_map[entry].size = gd->bd->bi_dram[i].size;
 		imx8m_mem_map[entry].attrs = attrs;
-		debug("Added memory mapping (%d): %llx %llx\n", entry,
+		printf("Added memory mapping (%d): %llx %llx\n", entry,
 		      imx8m_mem_map[entry].phys, imx8m_mem_map[entry].size);
 		i++; entry++;
 	}

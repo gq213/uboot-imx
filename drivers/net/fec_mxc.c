@@ -1168,6 +1168,7 @@ static int fec_phy_init(struct fec_priv *priv, struct udevice *dev)
 #ifdef CFG_FEC_MXC_PHYADDR
 	addr = CFG_FEC_MXC_PHYADDR;
 #endif
+	printf("%s: addr=%d\n", __func__, addr);
 
 	if (IS_ENABLED(CONFIG_DM_MDIO))
 		phydev = dm_eth_phy_connect(dev);

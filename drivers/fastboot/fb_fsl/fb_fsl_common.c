@@ -361,6 +361,7 @@ static int _fastboot_setup_dev(int *switched)
 
 	fastboot_devinfo.type	 = devinfo.type;
 	fastboot_devinfo.dev_id = devinfo.dev_id;
+	printf("%s: type=%d, dev_id=%d\n", __func__, devinfo.type, devinfo.dev_id);
 
 	return 0;
 }

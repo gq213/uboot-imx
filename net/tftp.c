@@ -518,14 +518,14 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
 #endif
 
 	case TFTP_OACK:
-		debug("Got OACK: ");
+		printf("Got OACK: ");
 		for (i = 0; i < len; i++) {
 			if (pkt[i] == '\0')
-				debug(" ");
+				printf(" ");
 			else
-				debug("%c", pkt[i]);
+				printf("%c", pkt[i]);
 		}
-		debug("\n");
+		printf("\n");
 		tftp_state = STATE_OACK;
 		tftp_remote_port = src;
 		/*
@@ -537,7 +537,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
 			if (strcasecmp((char *)pkt + i, "blksize") == 0) {
 				tftp_block_size = (unsigned short)
 					dectoul((char *)pkt + i + 8, NULL);
-				debug("Blocksize oack: %s, %d\n",
+				printf("Blocksize oack: %s, %d\n",
 				      (char *)pkt + i + 8, tftp_block_size);
 				if (tftp_block_size > tftp_block_size_option) {
 					printf("Invalid blk size(=%d)\n",
@@ -548,7 +548,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
 			if (strcasecmp((char *)pkt + i, "timeout") == 0) {
 				timeout_val_rcvd = (unsigned short)
 					dectoul((char *)pkt + i + 8, NULL);
-				debug("Timeout oack: %s, %d\n",
+				printf("Timeout oack: %s, %d\n",
 				      (char *)pkt + i + 8, timeout_val_rcvd);
 				if (timeout_val_rcvd != (timeout_ms / 1000)) {
 					printf("Invalid timeout val(=%d s)\n",
@@ -567,7 +567,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
 			if (strcasecmp((char *)pkt + i,  "windowsize") == 0) {
 				tftp_windowsize =
 					dectoul((char *)pkt + i + 11, NULL);
-				debug("windowsize = %s, %d\n",
+				printf("windowsize = %s, %d\n",
 				      (char *)pkt + i + 11, tftp_windowsize);
 			}
 		}
@@ -589,7 +589,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
 		len -= 2;
 
 		if (ntohs(*(__be16 *)pkt) != (ushort)(tftp_cur_block + 1)) {
-			debug("Received unexpected block: %d, expected: %d\n",
+			printf("Received unexpected block: %d, expected: %d\n",
 			      ntohs(*(__be16 *)pkt),
 			      (ushort)(tftp_cur_block + 1));
 			/*
@@ -619,7 +619,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
 		tftp_cur_block %= TFTP_SEQUENCE_SIZE;
 
 		if (tftp_state == STATE_SEND_RRQ) {
-			debug("Server did not acknowledge any options!\n");
+			printf("Server did not acknowledge any options!\n");
 			tftp_next_ack = tftp_windowsize;
 		}
 
@@ -815,7 +815,7 @@ void tftp_start(enum proto_t protocol)
 
 	sanitize_tftp_block_size_option(protocol);
 
-	debug("TFTP blocksize = %i, TFTP windowsize = %d timeout = %ld ms\n",
+	printf("TFTP blocksize = %i, TFTP windowsize = %d timeout = %ld ms\n",
 	      tftp_block_size_option, tftp_window_size_option, timeout_ms);
 
 	if (IS_ENABLED(CONFIG_IPV6))
